@@ -1,0 +1,9 @@
+# Ignore environment variables
+.env
+
+# Ignore SQLite database
+db.sqlite3
+
+.coverage
+.pytest_cache
+__pycache__
