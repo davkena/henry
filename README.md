@@ -79,3 +79,21 @@ Use the access token for authentication and it should be valid for 5 minutes.
 Run tests using pytest: 
 
     pytest
+
+## Tradeoffs
+Due to time constraint I was able to only implement authentication on top of the basic functionality as security is quite important.
+What should be added to this API would be:
+
+-**Data Validation and Sanitization**: Ensure all inputs are sanitized using Django’s ORM and validation mechanisms, which are SQL-injection safe. Set a maximum size for requests to prevent denial-of-service attacks using overly large payloads.
+
+-**HTTPS Enforcement**:Enforce HTTPS by using a reverse proxy like Nginx or a web server like Gunicorn with SSL certificates. Configure the SECURE_SSL_REDIRECT setting in Django to force HTTPS.
+
+-**Rate Limiting**: Implement rate limiting using **Django REST Framework’s throttle classes** or a third-party library like django-ratelimit
+
+-**Secure Data Handling**: Ensure sensitive data (e.g., client names) is encrypted at rest using Django’s cryptography or database encryption mechanisms. Not exposing sensitive client or provider information in responses unless necessary
+
+-**Prevent Expired Reservation Misuse**: Use Django’s built-in SECURE_* settings to enforce security headers. Install django-cors-headers to handle Cross-Origin Resource Sharing (CORS) securely if the API will be consumed by web apps from different origins
+
+-**Audit Logging**:Log sensitive operations like availability creation, appointment booking, and confirmations. Use Django’s built-in logging framework with proper log rotation.
+
+-**Prevent Enumeration Attacks**: Limit access to provider details and availability data to authenticated users. Return generic error messages instead of specific ones like “No availability exists for the selected date.”
