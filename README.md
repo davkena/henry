@@ -39,7 +39,7 @@ Create a .env file in the project root and add the following:
 
    
 
->  DJANGO_SECRET_KEY=your-secure-secret-key
+>     DJANGO_SECRET_KEY=placeholder-key-for-local-use
 >     DJANGO_DEBUG=True
 >     DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
 
